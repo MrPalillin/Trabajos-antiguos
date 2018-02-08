@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agenda SYSTEM "Agenda.dtd" >
+<agenda>
+  <persona alias="idvalue0" grupo="idvalue0">
+    <nombre>Daniel</nombre>
+    <apellidos>de Vicente</apellidos>
+    <correo_electronico>daniel.vicente@alumnso.uva.es</correo_electronico>
+    <telefono tipo="movilPersonal">123456789</telefono>
+  </persona>
+  <persona alias="idvalue2" grupo="idvalue0">
+  	<nombre>Marcos</nombre>
+    <apellidos>Mule</apellidos>
+    <correo_electronico>marmule@alumnso.uva.es</correo_electronico>
+    <telefono tipo="movilTrabajo">147258369</telefono>
+  </persona>
+  
+  <grupo idGrupo="idvalue1" miembros="idvalue0" nombreGrupo=""/>
+  
+</agenda>

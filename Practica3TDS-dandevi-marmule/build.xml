@@ -1,0 +1,143 @@
+<project name="Practica3TDS-dandevi-marmule" default="compilar" basedir=".">
+	<description>
+		Fichero build de Ant con los objetivos definidos en el enunciado de la practica
+	</description>
+
+	<!-- Properties -->
+	<property name="jacocoagent" location="target/coverage/jacoco.exec" />
+	<property environment="env" />
+
+	<!-- Condiciones para el tratamiento de OS -->
+	<condition property="isWindows">
+		<os family="windows" />
+	</condition>
+	<condition property="isUnix">
+		<os family="unix" />
+	</condition>
+
+	<!-- Condicion para comprobar la existencia del agente -->
+	<condition property="jacoco-agent-present">
+		<available file="${jacocoagent}" />
+	</condition>
+
+	<!-- Objetivos -->
+
+	<!-- Objetivo compilar -->
+	<target name="compilar" description="obtiene dependencias y compila" depends="limpiar, compilar_win, compilar_unix" />
+	<target name="compilar_win" description="compilar windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn compile test-compile" />
+		</exec>
+	</target>
+	<target name="compilar_unix" description="compilar unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn compile test-compile'" />
+		</exec>
+	</target>
+
+	<!-- Objetivo ejecutarTodo -->
+	<target name="ejecutarTodo" depends="ejecutarTestsTDDyCajaNegra, ejecutarTestEnAislamiento, ejecutarPruebasSecuencia" />
+	<!-- Objetivo ejecutarTestsTDD -->
+	<target name="ejecutarTestsTDDyCajaNegra" description="pruebas TDD y de caja negra" depends="ejecutarTestsTDDyCajaNegra_win, ejecutarTestsTDDyCajaNegra_unix" />
+	<target name="ejecutarTestsTDDyCajaNegra_win" description="ejecutarTestsTDDyCajaNegra windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn test -P Unit" />
+		</exec>
+	</target>
+	<target name="ejecutarTestsTDDyCajaNegra_unix" description="ejecutarTestsTDDyCajaNegra unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn test -P Unit'" />
+		</exec>
+	</target>
+	<!-- Objetivo ejecutarTestEnAislamiento -->
+	<target name="ejecutarTestEnAislamiento" description="pruebas de caja blanca en aislamiento" depends="ejecutarTestEnAislamiento_win, ejecutarTestEnAislamiento_unix" />
+	<target name="ejecutarTestEnAislamiento_win" description="ejecutarTestEnAislamiento windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn test -P Isolation" />
+		</exec>
+	</target>
+	<target name="ejecutarTestEnAislamiento_unix" description="ejecutarTestEnAislamiento unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn test -P Isolation'" />
+		</exec>
+	</target>
+	<!-- Objetivo ejecutarPruebasSecuencia -->
+	<target name="ejecutarPruebasSecuencia" description="caja negra, pruebas de secuencia" depends="ejecutarPruebasSecuencia_win, ejecutarPruebasSecuencia_unix" />
+	<target name="ejecutarPruebasSecuencia_win" description="ejecutarPruebasSecuencia windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn test -P Sequences" />
+		</exec>
+	</target>
+	<target name="ejecutarPruebasSecuencia_unix" description="ejecutarPruebasSecuencia unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn test -P Sequences'" />
+		</exec>
+	</target>
+	<!-- Objetivo obtenerInformeCobertura -->
+	<target name="obtenerInformeCobertura" description="obtener informes de cobertura" depends="compilar, obtenerInformeCobertura_win, obtenerInformeCobertura_unix" />
+	<target name="obtenerInformeCobertura_win" description="obtenerInformeCobertura Windows" if="isWindows" depends="prepare-agent_win">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn compile" />
+		</exec>
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn -X -Djacoco.dataFile=${jacocoagent} -Djacoco.outputDirectory=./jacoco_ut org.jacoco:jacoco-maven-plugin:report" />
+		</exec>
+	</target>
+	<target name="prepare-agent_win" if="isWindows" unless="jacoco-agent-present">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn -Djacoco.destFile=${jacocoagent} clean org.jacoco:jacoco-maven-plugin:0.7.8:prepare-agent install" />
+		</exec>
+	</target>
+	<target name="obtenerInformeCobertura_unix" description="obtenerInformeCobertura Unix" if="isUnix" depends="prepare-agent_unix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn compile test-compile'" />
+		</exec>
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn -X -Djacoco.dataFile=${jacocoagent} -Djacoco.outputDirectory=./jacoco_ut org.jacoco:jacoco-maven-plugin:report'" />
+		</exec>
+	</target>
+	<target name="prepare-agent_unix" if="isUnix" unless="jacoco-agent-present">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn -Djacoco.destFile=${jacocoagent} clean org.jacoco:jacoco-maven-plugin:0.7.8:prepare-agent install'" />
+		</exec>
+	</target>
+
+	<!-- Objetivo medidas -->
+	<target name="medidas" description="obtener informe sobre medidas" depends="obtenerInformeCobertura, medidas_win, medidas_unix" />
+	<target name="medidas_win" description="medidas Windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn jxr:jxr pmd:pmd " />
+		</exec>
+	</target>
+	<target name="medidas_unix" description="medidas Unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn -P Unit,Integration jxr:jxr pmd:pmd sonar:sonar -Dsonar.host.url=https://sonarqube.inf.uva.es/ -Dsonar.login=757a014b98b4ca240899c46bc5c0c5df15ea855b -Dsonar.analysis.mode=publish -Dsonar.issuesReport.console.enable=true -Dsonar.jacoco.reportPath=target/coverage/jacoco.exec -Dsonar.junit.reportPaths=target/surefire-reports'" />
+		</exec>
+	</target>
+
+	<!-- Objetivo documentar -->
+	<target name="documentar" description="genera el site de la documentación del proyecto" depends="documentar_win, documentar_unix" />
+	<target name="documentar_win" description="documentar en Windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn site" />
+		</exec>
+	</target>
+	<target name="documentar_unix" description="documentar en Unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn site'" />
+		</exec>
+	</target>
+
+	<!-- Objetivo limpiar -->
+	<target name="limpiar" description="Elimina archivos innecesarios" depends="limpiar_unix, limpiar_win" />
+	<target name="limpiar_win" description="limpiar en Windows" if="isWindows">
+		<exec dir="." executable="cmd">
+			<arg line="/c mvn clean" />
+		</exec>
+	</target>
+	<target name="limpiar_unix" description="limpiar en Unix" if="isUnix">
+		<exec dir="." executable="sh">
+			<arg line="-c 'mvn clean'" />
+		</exec>
+	</target>
+</project>

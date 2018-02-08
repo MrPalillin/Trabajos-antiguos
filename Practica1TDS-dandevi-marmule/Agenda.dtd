@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT agenda (persona*,grupo*)*>
+<!ELEMENT persona (nombre,apellidos?,correo_electronico+,telefono*)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT apellidos (#PCDATA)>
+<!ELEMENT correo_electronico (#PCDATA)>
+<!ELEMENT telefono (#PCDATA)>
+<!ATTLIST telefono tipo (movilPersonal|fijoPersonal|movilTrabajo|fijoTrabajo) "movilPersonal">
+<!ATTLIST persona alias ID #REQUIRED>
+<!ATTLIST persona grupo IDREF #REQUIRED>
+	
+<!ELEMENT grupo EMPTY>
+<!ATTLIST grupo nombreGrupo CDATA #REQUIRED>
+<!ATTLIST grupo miembros IDREFS #IMPLIED>
+<!ATTLIST grupo idGrupo ID #REQUIRED>
