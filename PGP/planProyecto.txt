@@ -1,0 +1,4 @@
+3;"actividad3"; ;10;"Programador"
+4;"actividad4";3;5;"Analista"
+5;"hito1";3,4;0; 
+6;"actividad6";5;10;"Analista-programador"

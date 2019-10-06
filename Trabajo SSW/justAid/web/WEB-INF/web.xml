@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>Inicio.html</welcome-file>
+    </welcome-file-list>
+    <!--
+    <servlet>
+        <servlet-name>Registro</servlet-name>
+        <servlet-class>controlador.Registro</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registro</servlet-name>
+        <url-pattern>/Registro</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>controlador.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Exit</servlet-name>
+        <servlet-class>controlador.Exit</servlet-class>
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>Exit</servlet-name>
+        <url-pattern>/Exit</url-pattern>
+    </servlet-mapping>
+     
+    <servlet>
+        <servlet-name>EliminarProfesional</servlet-name>
+        <servlet-class>controlador.EliminarProfesional</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarProfesional</servlet-name>
+        <url-pattern>/EliminarProfesional</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>datosProfesional</servlet-name>
+        <servlet-class>controlador.datosProfesional</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>datosProfesional</servlet-name>
+        <url-pattern>/datosProfesional</url-pattern>
+    </servlet-mapping>-->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AppOintments-estdieg-dandevi</string>
+    <string name="add_button_text">Crear evento</string>
+    <string name="a_ada_un_comentario">Añada un comentario</string>
+    <string name="crear">Crear</string>
+    <string name="hh_mm">hh:mm</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="nombre">Nombre</string>
+    <string name="atras">Atras</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

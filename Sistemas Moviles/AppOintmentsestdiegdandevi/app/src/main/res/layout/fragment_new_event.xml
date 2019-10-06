@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_event_vista"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".NewEventActivity">
+
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/nombre" />
+
+    <EditText
+        android:id="@+id/fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/dd_mm_yyyy"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/hora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/hh_mm"
+        android:inputType="time" />
+
+    <EditText
+        android:id="@+id/comentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/a_ada_un_comentario" />
+
+    <Button
+        android:id="@+id/buttonCrear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:text="@string/crear" />
+
+
+</LinearLayout>

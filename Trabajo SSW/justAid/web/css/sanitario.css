@@ -1,0 +1,102 @@
+html{
+    font-family: "helvetica neue","Arial","sans-serif";
+}
+body{
+    margin: 0;
+    padding-top: 3em;
+    font-family: "helvetica neue","Arial","sans-serif";
+    background-image:  url(../imagenes/bac.jpg);
+    background-size: cover;
+}
+.recuadro{
+    position: relative;
+    left: 16%;
+    width: 76em;
+    height: 52em;
+    background-color: white;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: black;
+}
+.persona{
+    text-justify: auto;
+    text-align: center;
+    width: 50%;
+    height: 10%;
+    margin: 1em 1em 1em 1em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 12px;
+}
+.salir{
+    position: absolute;
+    top: 13%;
+    left: 70%;
+}
+#segundo{
+    position: absolute;
+    top: 13%;
+    left: 80%;
+}
+.atendido{
+    text-justify: auto;
+    text-align: center;
+    width: 50%;
+    height: 10%;
+    margin: 1em 1em 1em 1em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 12px;
+}
+.infocita{
+   text-align: center;
+    width: 60%;
+    height: 15%;
+    margin: 1em 1em 1em 1em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 12px;
+    border-color: black;
+}
+.horario{
+    position: absolute;
+    top: 30%;
+    left: 80%;
+    text-align: center;
+    width: 10%;
+    height: 2em;
+    margin: 1em 1em 1em 1em;
+    border-style: solid;
+    border-color: black;
+}
+.infoadicional{
+    position: relative;
+    left: 7%;
+    top:5%;
+    text-align: center;
+    width: 80%;
+    height: 35%;
+    margin: 1em 1em 1em 1em;
+    border-style: dotted;
+    border-width: 0.3em;
+    border-color: black;
+}
+.botones{
+    position: relative;
+    background-color: black;
+    left: 60%;
+    text-align: center;
+    width: 15%;
+    height: 40px;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+    margin: 0;
+    background-color: skyblue;
+    color:white;
+    border: none;
+    margin-top: -55px;
+}
+.botones:hover{
+    background-color: cadetblue;   
+}

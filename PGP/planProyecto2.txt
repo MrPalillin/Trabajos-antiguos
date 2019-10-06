@@ -1,0 +1,4 @@
+7;actividad7;1;10;Responsable pruebas
+8;actividad4;7;5;Probador
+9;hito2;7,8;0; 
+10;actividad6;7,8,9;10;Diseñador

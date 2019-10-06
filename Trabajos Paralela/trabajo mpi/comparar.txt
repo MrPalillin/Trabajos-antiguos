@@ -1,0 +1,25 @@
+[0]Inicio 0 y tamaño 20
+[0]Valor en 0: 6.577125
+[0]Valor en 1: 6.577681
+[0]Valor en 2: 6.954019
+[0]Valor en 3: 7.671945
+[0]Valor en 4: 9.110477
+[0]Valor en 5: 9.512781
+[0]Valor en 6: 9.247315
+[0]Valor en 7: 8.494692
+[0]Valor en 8: 8.680078
+[0]Valor en 9: 8.621273
+[0]Valor en 10: 8.398662
+[0]Valor en 11: 7.734934
+[0]Valor en 12: 6.699415
+[0]Valor en 13: 6.092744
+[0]Valor en 14: 5.686097
+[0]Valor en 15: 5.356803
+[0]Valor en 16: 5.067659
+[0]Valor en 17: 4.775361
+[0]Valor en 18: 4.544762
+[0]Valor en 19: 4.352131
+
+Time: 0.000008
+Result: 5 9.290192
+

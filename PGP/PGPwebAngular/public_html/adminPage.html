@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Admin GEAPROS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <!-- biblioteca angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> 
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- Scipt inicial -->
+
+    </head>
+
+    <body style="margin:20px auto; width:85%;" ng-controller="pgpCtrl">
+        <div class="panel panel-primary">
+            <h3 class="panel-heading" style="margin:0; margin-bottom:15px; text-align:center;">GEAPROS</h3>
+
+            <h3>Dar de alta nuevo usuario: <a data-toggle="collapse" data-parent="#accordion" ng-click="showDarAltaNuevoUsuario(ngHide4)">click aquí</a></h3><!-- Menu colapsable -->
+           
+            <div ng-hide="ngHide4">
+                <p>Rellene los siguientes campos para el nuevo usuario:</p>
+                <form>
+                    <label>DNI:</label> <input type="text" ng-model="dni" placeholder="" requied/>
+                    <label>Clave:</label> <input type="text" ng-model="clave" placeholder="" requied/>
+                    <hr/>
+                    <label>Nombre:</label> <input type="text" ng-model="nombre" placeholder="" requied/>
+                    <label>Apellidos:</label> <input type="text" ng-model="apll" placeholder="" requied/>
+                    <hr/>
+                    <label>Nivel:</label>
+                    <select type="text" ng-model="nivel" requied>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option value="">-- Select --</option>
+                    </select>
+                    <hr/>
+                    <button class="btn btn-primary" ng-click="addUsuario(dni, clave, nombre, apll, nivel)">Dar de alta</button>
+                    <button class="btn btn-primary" type="reset">Borrar todo</button>
+                </form>
+                <div ng-if="creaUsuario === 'Exito'">
+                    <p style="color: green"> Usuario añadido a la base de datos. <p>  
+                </div>
+                <div ng-if="creaUsuario === 'Error'">
+                    <p style="color: red">Ya existe un usuario en el sistema con el DNI introducido</p>
+                </div>   
+            </div>
+
+            <h3>Dar de alta nuevo proyecto: <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" ng-click="showDarAltaNuevoProyecto(ngHide5)">click aquí</a></h3><!-- Menu colapsable -->
+
+            <div ng-hide="ngHide5">
+
+                <label>Jefe de Proyecto</label> 
+                <select ng-model="jefeSeleccionado"
+                        ng-options="jefe.values.dni for jefe in jefesArray" >
+
+                    <option value="">-- Select --</option>
+                </select>
+
+                <hr/>
+                <!--<option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>-->
+                <label>Fecha inicio: </label> 
+                <div class="input-group" style="width:200px">
+                    <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="inpDate" is-open="isDatepickerOpen" datepicker-options="datepickerOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="isDatepickerOpen = !isDatepickerOpen">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                      </button>
+                    </span>
+                </div>
+                <hr/>
+
+                <label>Descripcion:</label> 
+                <textarea type="text" ng-model="descrip" placeholder="Introduzca aquí una descripción para el proyecto" requied></textarea>
+                <hr/>
+
+                <button class="btn btn-primary" ng-click="addProyecto(jefeSeleccionado.values.dni, processDate(inpDate), descrip)">Dar de alta</button>
+                <div ng-if="creaProyecto === 'Exito'">
+                    <p style="color: green"> Proyecto añadido a la base de datos. <p>  
+                </div>
+                <div ng-if="creaProyecto === 'Error'">
+                    <p style="color: red">Error al crear el proyecto</p>
+                </div>  
+            </div>
+            
+            <hr/>
+            <div class="panel-body" style="text-align: center">   
+                <button class="btn btn-primary" ng-click="informeGlobalProyectos()">Resúmenes globales de proyectos anteriores</button>
+            </div>a
+
+            <div class="panel-body">   
+                <button class="btn btn-primary" ng-click="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>devPage GEAPROS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- biblioteca angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> 
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body style="margin:20px auto; width:85%;" ng-controller="pgpCtrl">
+        <div class="panel panel-primary">
+            <h1 class="panel-heading" style="margin:0; margin-bottom:15px; text-align:center;">GEAPROS</h1>
+            
+        <div><h3>Actividades próxima semana:</h3>
+                <table class="table table-striped table-bordered">
+                    <thead> <tr>
+                            <th>ID actividad</th>
+                            <th>Proyecto</th>
+                            <th>Descripción</th>
+                            <th>Duración estimada</th>
+                            <th>Persona asignada</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="">
+                            <td>{{}}</td>
+                            <td>{{}}</td>
+                            <td>{{}}</td>
+                            <td>{{}}</td>
+                            <td>{{}}</td>
+                            
+                        </tr> 
+                    </tbody>
+                </table></div>
+            <div class="panel-body">   
+                <button class="btn btn-primary" ng-click="">Atrás</button>
+            </div>
+        </div>
+    </body>
+</html>

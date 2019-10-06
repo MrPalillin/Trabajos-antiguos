@@ -1,0 +1,53 @@
+20 test1
+Time: 0.000010
+Result: 14 0.381967
+
+20 test1 test2
+Time: 0.000014
+Result: 14 0.381967 14 0.497186
+
+20 test1 test2 test3
+Time: 0.000015
+Result: 14 0.381967 14 0.497186 10 0.600869
+
+20000 test4
+Time: 0.002855
+Result: 2 0.616334
+
+20000 test4 test5
+Time: 0.003940
+Result: 2 0.616334 32 1.136576
+
+100000 test5
+Time: 0.005970
+Result: 32 0.572464
+
+1000000 test_c1 test_c2
+Result: 374529 25.130859 343642 47.111816
+
+10000000 test_d1 test_d2
+Result: 3204179 15.059799 5626762 26.045630
+
+10 "Maximo en primero"
+Result: 0 0.000000
+
+10 "Maximo en ultimo"
+Result: 0 0.000000
+
+10 "Maximo en segundo pero primero es mas grande"
+Result: 0 0.000000 Si no hya otro maximo
+Busca en las demas posiciones
+
+10 "Maximo en penultimo pero ultimo es mas grande"
+Result: 0 0.000000 Si no hya otro maximo
+Busca en las demas posiciones
+
+10 "Dos maximos consecutivos"
+Result: 0 0.000000 Si no hay otro maximo
+Busca en las demas posiciones
+
+10 "Dos maximos no consecutivos"
+Result: 3 2.000000 (El primero que encuentra)
+
+10 "No hay maximos"
+Result: 0 0.000000

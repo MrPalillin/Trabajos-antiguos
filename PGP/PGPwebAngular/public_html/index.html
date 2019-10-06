@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="moduloPrincipal">
+    <head>
+        <title>GEAPROS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- biblioteca angular -->
+        <script data-require="angularjs@1.4.9" data-semver="1.4.9" src="https://code.angularjs.org/1.4.9/angular.min.js"></script>
+       <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"> </script> 
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- datepicker -->
+        <!--<link data-require="bootstrap-css@3.0.3" data-semver="3.0.3" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+        <script data-require="angular.js@1.2.9" data-semver="1.2.9" src="http://code.angularjs.org/1.2.9/angular.js"></script>
+        <script data-require="ui-bootstrap@*" data-semver="0.10.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+        -->        
+        
+        <script data-require="jquery@1.11.3" data-semver="1.11.3" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link data-require="bootstrap@3.3.2" data-semver="3.3.2" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+        <script data-require="bootstrap@3.3.2" data-semver="3.3.2" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+        <script data-require="ui-bootstrap@*" data-semver="1.3.2" src="https://cdn.rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-1.3.2.js"></script>
+        
+        <!-- File -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+    
+        <!-- Scipt inicial -->
+        <script src="webLogic.js"></script>
+        <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+    </head>
+    <body ng-controller="pgpCtrl">
+        <div>
+            <ng-include src="'login.html'" ng-show="displayMode === 'login'"></ng-include>
+            <ng-include src="'adminPage.html'" ng-show="displayMode === 'admin'"></ng-include>
+            <ng-include src="'bossPage.html'" ng-show="displayMode === 'boss'"></ng-include>
+            <ng-include src="'devPage.html'" ng-show="displayMode === 'dev'"></ng-include>
+            <ng-include src="'informeActividadesPosteriores.html'" ng-show="displayMode === 'informeActPost'"></ng-include>
+            <ng-include src="'informeGlobal.html'" ng-show="displayMode === 'informeGlobal'"></ng-include>
+            <ng-include src="'informePendientes.html'" ng-show="displayMode === 'informePendientes'"></ng-include>
+            <ng-include src="'informeCierreProyecto.html'" ng-show="displayMode === 'informeCierre'"></ng-include>
+            <ng-include src="'informeSemanal.html'" ng-show="displayMode === 'informeSemanal'"></ng-include> 
+            <ng-include src="'informeRetrasos.html'" ng-show="displayMode === 'informeRetrasos'"></ng-include>
+        </div>
+    </body>
+</html>

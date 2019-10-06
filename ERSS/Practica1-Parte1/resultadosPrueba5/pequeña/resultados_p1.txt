@@ -1,0 +1,44 @@
+This is ApacheBench, Version 2.3 <$Revision: 1796539 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking virtual.lab.inf.uva.es (be patient)
+
+
+Server Software:        Apache/2.4.18
+Server Hostname:        virtual.lab.inf.uva.es
+Server Port:            31222
+
+Document Path:          /p.html
+Document Length:        156 bytes
+
+Concurrency Level:      50
+Time taken for tests:   0.231 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      426000 bytes
+HTML transferred:       156000 bytes
+Requests per second:    4328.03 [#/sec] (mean)
+Time per request:       11.553 [ms] (mean)
+Time per request:       0.231 [ms] (mean, across all concurrent requests)
+Transfer rate:          1800.53 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   0.4      2       3
+Processing:     2   10   1.0     10      13
+Waiting:        2    9   1.0     10      12
+Total:          4   11   1.1     11      15
+WARNING: The median and mean for the waiting time are not within a normal deviation
+        These results are probably not that reliable.
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     12
+  75%     12
+  80%     12
+  90%     12
+  95%     13
+  98%     13
+  99%     13
+ 100%     15 (longest request)

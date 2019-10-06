@@ -1,0 +1,6 @@
+graph cadenas{
+	"a" 
+	-- "Nodo \"sucesor\"";
+	"No nodo";
+	"a" -- 				"a"
+}

@@ -1,0 +1,2 @@
+./client -u g24 -x 1r3CtRMN -q cuda energy_CUDA.cu
+./client -u g24 -x 1r3CtRMN -q cudalb energy_CUDA.cu

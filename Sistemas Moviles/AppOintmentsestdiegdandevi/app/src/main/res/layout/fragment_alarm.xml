@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.example.estdieg_dandevi.appointments_estdieg_dandevi.AlarmFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/alarm_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/off_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apagar"/>
+
+</LinearLayout>

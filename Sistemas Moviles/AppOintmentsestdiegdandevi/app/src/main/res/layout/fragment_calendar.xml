@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/vista_calendario"
+    android:layout_height="match_parent">
+
+
+    <CalendarView
+        android:id="@+id/calendario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/create_event"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/add_button"
+        android:contentDescription="@string/add_button_text" />
+
+    <Button
+        android:id="@+id/view_all"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Ver todos" />
+
+</FrameLayout>

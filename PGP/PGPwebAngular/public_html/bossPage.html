@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Jefe Proyecto GEAPROS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- biblioteca angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> 
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body style="margin:20px auto; width:85%;" ng-controller="pgpCtrl">
+        <div class="panel panel-primary">
+            <h3 class="panel-heading" style="margin:0; margin-bottom:15px; text-align:center;">GEAPROS</h3>
+            <hr/>
+
+
+            <h3 style="text-align: center">Proyecto actual:</h3>
+            <div ng-if="!!proyecto.idProyecto">
+                <p style="text-align: center">ID proyecto: {{proyecto.idProyecto}}</p>
+                <p style="text-align: center">Descripción: {{proyecto.desripcion}}</p>
+            </div>
+            <div ng-if="!proyecto.idProyecto">
+                <p style="text-align: center">No hay un proyecto asignado actualmente</p>
+            </div>
+            
+            <h3 style="text-align: center">Cargar plan de proyecto:</h3>
+            <div class="form-group" style="margin-left: 40px">
+                <input class="btn btn-primary" type="file" ngf-select="SelectFile($file)" />
+                <input class="btn btn-primary" type="button" value="Subir plan proyecto" ng-click="Upload()" />
+            </div>
+                <hr />
+            <div ng-hide="hideConfirmarPlanProyecto" style="margin-left: 40px">
+                <table class="table table-striped table-bordered" ng-show="IsVisible">
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripcion</th>
+                        <th>ActPredecesora</th>
+                        <th>Horas Hombre</th>
+                        <th>Rol</th>
+                    </tr>
+                    <tbody ng-repeat="a in planProyecto">
+                        <tr>
+                            <td>{{a.ActivId}}</td>
+                            <td>{{a.ActivDescripcion}}</td>
+                            <td>{{a.ActivPredecesora}}</td>
+                            <td>{{a.HorasHombre}}</td>
+                            <td>{{a.Rol}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" ng-click="setPlanProyecto(planProyecto, proyecto.idProyecto)">Confirmar</button> <!-- Confirmacion del plan de proyecto -->
+            </div>
+            <div ng-if="annadirPlan === 'Exito'">
+                <p style="color: green"> Plan Proyecto añadido a la base de datos. <p>  
+            </div>
+            <div ng-if="annadirPlan === 'Error'">
+                <p style="color: red">Error al añadir Plan Proyecto</p>
+            </div>  
+            
+            
+            <h3 style="margin-left: 40px">Desarrolladores disponibles: 
+                <a data-toggle="collapse" data-parent="#accordion" ng-click="showProyectDevelopersDisp(ngHide1)">
+                   click aquí</a>
+            </h3>
+
+            <div ng-hide="ngHide1">
+                <div class="panel-body" ng-if="devsDisponibles !== 'Not Found'">
+
+                    <table class="table table-striped listaDevsProyectotable-bordered">
+                        <thead> <tr>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Nivel</th>
+                                <th>Participacion (%)</th>
+                                <th>Rol</th>
+                                <th></th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dev in devsDisponibles">
+                                <td>{{dev.dni}}</td>
+                                <td>{{dev.nombre}}</td>
+                                <td>{{dev.apellidos}}</td>
+                                <td>{{dev.nivel}}</td>
+                                <td>                               
+                                    <select ng-init="porcentaje = '100'" ng-model="porcentaje" ng-options="option as option for option in [25, 50, 75, 100]"><option value="">100</option></select>
+                                </td>
+                                <td>                               
+                                    <select ng-init="rolesPosi=getRoles(dev.nivel)" ng-model="rolA" ng-options="n for n in rolesPosi"><option value="">-- Select --</option></select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-xs btn-primary"
+                                    ng-click="setParticipacionDev(dev,proyecto.idProyecto,porcentaje,rolA)">Añadir</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="participacionCreada === 'Exito'">
+                        <p style="color: green"> Participacion añadida con exito. <p>  
+                    </div>
+                    <div ng-if="participacionCreada === 'Error'">
+                        <p style="color: red">Error al añadir. Puede que el porcentaje de participación introducido no sea válido.</p>
+                    </div>
+
+                    <div class="panel-body" ng-if="ErrorDevsDisponibles === 'Not Found'">
+                        <p style="color: red"> No hay desarrolladores disponibles en este momento. <p> 
+                    </div>
+                </div>
+            </div>
+                
+            <h3 style="margin-left: 40px">Desarrolladores asignados al proyecto: 
+                <a data-toggle="collapse" data-parent="#accordion" ng-click="showProyectDevelopers(ngHide8)">
+                   click aquí</a>
+            </h3>
+            
+            <div ng-hide="ngHide8">
+                <div class="panel-body" >
+
+                    <table class="table table-striped listaDevsProyectotable-bordered">
+                        <thead> <tr>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Participacion (%)</th>
+                                <th>Rol</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dev in particProyecto">
+                                <td>{{dev.participacionPK.dni}}</td>
+                                <td>{{dev.persona.nombre}}</td>
+                                <td>{{dev.persona.apellidos}}</td>
+                                <td>{{dev.porcentaje}}</td>
+                                <td>{{dev.rol}}</td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                </div>
+            </div> 
+                
+            <h3 style="margin-left: 40px">Actividades:
+                <a data-toggle="collapse" data-parent="#accordion" ng-click="showActividades(ngHide2)">
+                   click aquí</a>
+            </h3>
+            
+            <div ng-hide="ngHide2">
+                <div class="panel-body" ng-if="actividadesProyecto !== 'Not Found'">
+                    <table class="table table-striped table-bordered">
+                        <thead> <tr>
+                                <th>ID actividad</th>
+                                <th>Descripción</th>
+                                <th>Rol Requerido</th>
+                                <th>Duración estimada</th>
+                                <th>Personas asignadas</th>
+                                <th>Añadir recurso</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="act in actividadesProyecto">
+                                <td>{{act.actividadPK.idActividad}}</td>
+                                <td>{{act.descripcion}}</td>
+                                <td>{{act.rolRequerido}}</td>                                
+                                <td>{{act.duracionEstimada}}</td>
+                                <td ng-if="participantesActividades" >                                    
+                                    <select ng-init="parti=getParticipantes(act.actividadPK.idActividad)" ng-model="actiMos" ng-options="n for n in parti"><option value="">-- Mostrar --</option></select>             
+                                </td> 
+                                <td ng-if="participantesActividades && particProyecto">
+                                    {{act.duracionReal}}
+                                    <select ng-init="capaci=capacitados(act)" ng-model="actiSele" ng-options="n for n in capaci"><option value="">-- Select --</option></select> 
+                                    <button ng-if="act.duracionReal === undefined" class="btn btn-xs btn-primary"
+                                    ng-click="setActividadAsignada(act.actividadPK.idActividad, actiSele)">Añadir</button>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-xs btn-primary" ng-if="act.duracionReal === undefined" 
+                                    ng-click="cerrarActividad(act)">
+                                    Finalizar</button>
+                                    <p ng-if="act.duracionReal !== undefined">Cerrada</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="panel-body" ng-if="actividadesProyecto === 'Not found'">
+                        <h3>No hay actividades vinculadas al proyecto</h3>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-left: 40px">Informes de actividad: 
+                <a data-toggle="collapse" data-parent="#accordion" ng-click="showInformesAct(ngHide3)">
+                   click aquí</a>
+            </h3>
+            
+            <div ng-hide="ngHide3">
+                <div class="panel-body" ng-if="esfuerzosProyecto !== 'Not Found'">
+                    <table class="table table-striped table-bordered">
+                        <thead> <tr>
+                                <th>Desarrollador (dni)</th>
+                                <th>ID actividad</th>
+                                <th>Semana</th>
+                                <th>Comentario</th>
+                                <th>Horas Hombre invertidas</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="esf in esfuerzosProyecto">
+                                <td>{{esf.esfuerzosemanalPK.dni}}</td>
+                                <td>{{esf.esfuerzosemanalPK.idActividad}}</td>
+                                <td>{{esf.esfuerzosemanalPK.numSemana}}</td>
+                                <td>{{esf.comentario}}</td>
+                                <td>{{esf.horasInvertidas}}</td>
+                               <td class="text-center">
+                                    <button class="btn btn-xs btn-primary" ng-if="esf.aprobado===false" 
+                                    ng-click="aprobarEsfuerzo(proyecto.idProyecto,esf.esfuerzosemanalPK.idActividad,esf.esfuerzosemanalPK.numSemana,esf.esfuerzosemanalPK.dni)">
+                                    Aprobar</button>
+                                   <p ng-if="esf.aprobado===true">Aprobado</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="panel-body" ng-if="esfuerzosProyecto === 'Not found'">
+                        <h3>No hay actividades vinculadas al proyecto</h3>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div style="margin-left: 40px">
+                <button class="btn btn-primary" ng-click="cerrarProyecto(proyecto.idProyecto)">Finalizar proyecto</button>
+            </div>
+            <hr/>
+            <button class="btn btn-primary" ng-click="informePendientes()">Informes pendientes</button>
+            <button class="btn btn-primary" ng-click="informeRetrasos()">Informe de activiades retrasadas</button>
+            
+            <hr/>
+            <div class="panel-body" style="text-align: center">   
+                <button class="btn btn-primary" ng-click="informeGlobalProyectos()">Resúmenes globales de proyectos anteriores</button>
+            </div>
+            
+            <hr/>
+        
+            <div class="panel-body"style="margin-left: 40px">   
+                <button class="btn btn-primary" ng-click="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </body>
+</html>

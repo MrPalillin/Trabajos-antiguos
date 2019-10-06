@@ -1,0 +1,82 @@
+html{
+    font-family: "helvetica neue","Arial","sans-serif";
+}
+body{
+    margin: 0;
+    padding-top: 3em;
+    font-family: "helvetica neue","Arial","sans-serif";
+    background-image:  url(../imagenes/bac.jpg);
+    background-size: cover;
+}
+.recuadro{
+    position: relative;
+    left: 16%;
+    width: 56em;
+    height: 32em;
+    background-color: white;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: black;
+}
+.persona{
+    position: relative;
+    top: 3%;
+    left:10%;
+    text-justify: auto;
+    text-align: center;
+    width: 50%;
+    height: 10%;
+    margin: 1em 1em 1em 1em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 12px;
+}
+.actividad {
+    position: relative;
+    top: 3%;
+    left:10%;
+    text-justify: auto;
+    text-align: center;
+    width: 50%;
+    height: 10%;
+    margin: 1em 1em 1em 1em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 12px;
+}
+.salir{
+    position: absolute;
+    top: 13%;
+    left: 70%;
+}
+#segundo{
+    position: absolute;
+    top: 13%;
+    left: 80%;
+}
+
+.imagen{
+    position: absolute;
+    top: 18%;
+    left: 70%;
+    width: 15%;
+    height: 15%;
+}
+.imagenserv{
+    width: 100%;
+    height: 100%;
+}
+.infocita{
+    position: relative;
+    top: 10%;
+    left: 10%;
+   text-align: center;
+    width: 80%;
+    height: 40%;
+    border-style: solid;
+    border-style: dotted;
+    border-width: 0.3em;
+    border-color: black;
+}
+
+

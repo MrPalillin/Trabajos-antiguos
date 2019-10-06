@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>devPage GEAPROS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- biblioteca angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> 
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+    </head>
+    <body style="margin:20px auto; width:85%;" ng-controller="pgpCtrl">
+        <div class="panel panel-primary">
+            <h1 class="panel-heading" style="margin:0; margin-bottom:15px; text-align:center;">GEAPROS</h1>
+            <div>
+                <h3>Actividades asignadas:</h3>
+                <table class="table table-striped table-bordered">
+                    <thead> <tr>
+                            <th>ID actividad</th>
+                            <th>Proyecto</th>
+                            <th>Fecha inicio proyecto</th>
+                            <th>Descripción</th>
+                            <th>Duración estimada</th>
+                            <th>Duración Real</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="act in activProyectosActivos">
+                            <td>{{act.actividadPK.idActividad}}</td>
+                            <td>{{act.actividadPK.idProyecto}}</td>
+                            <td>{{processDate(act.proyecto.fechaInicio)}}</td>
+                            <td>{{act.descripcion}}</td>
+                            <td>{{act.duracionEstimada}}</td>
+                            <td>{{act.duracionReal}}</td>
+                            
+                        </tr> 
+                    </tbody>
+                </table>
+                <h3>Crear informe de actividad semanal:<a data-toggle="collapse" data-parent="#accordion" href="#collapse1" ng-click="showCrearEsfuerzoSemanal(ngHide6)">Click aquí</a></h3>         
+                <div ng-hide="ngHide6">
+                    <label>Actividad:</label>
+                    <select ng-model="selectedId" ng-options="x.actividadPK.idActividad for x in actividadesActiv">
+                        <option value="">-- Select --</option>
+                    </select>
+                    <br>
+                    <label>Fecha:</label>
+                    <div class="input-group" style="width:200px">
+                        
+                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="inpDate" is-open="isDatepickerOpen" datepicker-options="datepickerOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="isDatepickerOpen = !isDatepickerOpen">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    <br>
+                    <label>Comentario:</label><input type="text" ng-model="comentario" requied/>
+                    <br>
+                    <label>Esfuerzo (Horas Hombre):</label><select ng-model="horas" ng-options="n for n in [] | range:1:41">
+                                                        <option value="">-- Select --</option>
+                                                       </select>
+                        
+                    <button class="btn btn-primary" ng-click="addEsfuerzoSemanal(selectedId, inpDate, comentario, horas)">Crear</button>
+                    <div ng-if="annadirEsfuerzo === 'Exito'">
+                        <p style="color: green"> Esfuerzo creado con exito <p>  
+                    </div>
+                    <div ng-if="annadirEsfuerzo === 'Error crear'">
+                        <p style="color: red">Ya existe un esfuerzo creado esa semana.</p>
+                    </div>
+                    <div ng-if="annadirEsfuerzo === 'Error fecha'">
+                        <p style="color: red">La fecha seleccionada es superior al dia de hoy o inferior al comienzo del poryecto.</p>
+                    </div> 
+                </div>
+                <h3>Informes de esfuerzos creados:<a data-toggle="collapse" data-parent="#accordion" ng-click="showEsfuerzoSemanalCreados(ngHide7)">Click aquí</a></h3>
+                <div ng-hide="ngHide7">
+                    <h4>Seleccionar rango de fechas:</h4>
+                    
+                    <label>Límite inferior:</label>
+                    <div class="input-group" style="width:200px">
+                        
+                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="inferior" is-open="isDatepickerOpen2" datepicker-options="datepickerOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="isDatepickerOpen2 = !isDatepickerOpen2">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    <label>Límite Superior</label>
+                    <div class="input-group" style="width:200px">
+                        
+                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="superior" is-open="isDatepickerOpen3" datepicker-options="datepickerOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="isDatepickerOpen3 = !isDatepickerOpen3">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                    </div>
+                    <button class="btn btn-primary" ng-click="getEsfuerzosProyectosActivos(inferior, superior)">Obtener esfuerzos</button>
+                    
+                    <div ng-if="getEsfu === 'Exito'">
+                        <p style="color: green"> Esfuerzos obtenidos con exito <p>  
+                    </div>
+                    <div ng-if="getEsfu === 'Error get'">
+                        <p style="color: red">Error al obtener los esfuerzos.</p>
+                    </div>
+                    <div ng-if="getEsfu === 'Error fecha'">
+                        <p style="color: red">La fecha seleccionada es superior al dia de hoy o inferior al comienzo del poryecto. Fecha inf > Fecha sup.</p>
+                    </div> 
+                    
+                    <br>
+                    <table class="table table-striped table-bordered">
+                    <thead> <tr>
+                            <th>Proyecto</th>
+                            <th>ID actividad</th>
+                            <th>Número de  Semana</th>
+                            <th>Horas Hombre</th>
+                            <th>Comentario</th>
+                            <th>Aprobado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="esfuerzo in esfuerzoProyectosActivos">
+                            
+                            <td>{{esfuerzo.esfuerzosemanalPK.idProyecto}}</td>
+                            <td>{{esfuerzo.esfuerzosemanalPK.idActividad}}</td>
+                            <td>{{esfuerzo.esfuerzosemanalPK.numSemana}}</td> 
+                            <td ng-if="esfuerzo.aprobado">{{esfuerzo.horasInvertidas}}</td>
+                            <td ng-if="!esfuerzo.aprobado">
+                                {{esfuerzo.horasInvertidas}}  
+                                <select ng-model="nuevoTiem" ng-options="n for n in [] | range:1:41"><option value="">-- Select --</option></select>
+                                <button class="btn btn-xs btn-primary"
+                                    ng-click="setModifEsfuerzo(esfuerzo, nuevoTiem,'nuevoTiem')">Modificar</button>
+                            </td>
+                            <td ng-if="esfuerzo.aprobado">{{esfuerzo.comentario}}</td>
+                            <td ng-if="!esfuerzo.aprobado">
+                                {{esfuerzo.comentario}}
+                                <input type="text" ng-model="nuevoComentario"/>
+                                <button class="btn btn-xs btn-primary"
+                                    ng-click="setModifEsfuerzo(esfuerzo, nuevoComentario,'nuevoComentario')">Modificar</button>
+                            </td>
+                            <td>{{esfuerzo.aprobado}}</td>
+                        </tr> 
+                    </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+            
+            <hr/>
+            <div class="panel-body" style="text-align: center">   
+                <button class="btn btn-primary" ng-click="informeGlobalProyectos()">Resúmenes globales de proyectos anteriores</button>
+            </div>
+            
+            <div class="panel-body">   
+                <button class="btn btn-primary" ng-click="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </body>
+</html>
