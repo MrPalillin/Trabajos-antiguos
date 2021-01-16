@@ -1,0 +1,36 @@
+builtin(A is B).
+builtin(A = B).
+builtin(A >= B).
+builtin(read(X)).
+builtin(A > B).
+builtin(A < B).
+builtin(A =:= B).
+builtin(A =< B).
+builtin(functor(T, F, N)).
+builtin(write(X)).
+
+valor(w1,1).
+
+valor(W,X):-
+    conectado(W,W1),
+    valor(W1,X).
+
+conectado(w2,w1).
+conectado(w3,w2).
+conectado(w4,w3).
+
+solve_traza(A):-
+    solve_traza(A,0).
+
+solve_traza(true, _):-
+    !.
+
+solve_traza((A,B),Prf):-
+    solve_traza(A,Prf),
+    solve_traza(B,Prf).
+
+solve_traza(A, Prf):-builtin(A), !, A, display(A, Prf), nl.
+solve_traza(A, Prf) :-clause(A,B),display(A, Prf),nl, Prf1 is Prf +1,solve_traza(B,Prf1).
+
+display(A, Prf):-Espacios is 3*Prf, tab(Espacios), write(Prf), tab(1),write(A).
+

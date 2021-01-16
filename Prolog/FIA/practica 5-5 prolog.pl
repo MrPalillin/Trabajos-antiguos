@@ -1,0 +1,11 @@
+feliz:-
+    aprobar(X,ai),
+    loteria(X).
+aprueba(X,ai):-
+    estudia(X)|
+    afortunado(X).
+estudia(pedro).
+no_estudia(juan):-estudia(juan),!,fail.
+afortunado(juan).
+loteria(X):-
+    afortunado(X).

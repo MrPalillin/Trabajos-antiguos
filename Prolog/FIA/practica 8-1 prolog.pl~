@@ -1,0 +1,2 @@
+esLista(X):-
+    X is[_|_].

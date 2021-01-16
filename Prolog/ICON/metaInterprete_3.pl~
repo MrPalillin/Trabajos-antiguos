@@ -1,0 +1,22 @@
+mueve(q0,a,[z],q0,[a|z]).
+mueve(q0,b,[z],q0,[b|z]).
+mueve(q0,a,H,q0,[a|H]).
+mueve(q0,b,H,q0,[b|H]).
+mueve(q0,c,H,q1,H).
+mueve(q1,a,a,q1,[]).
+mueve(q1,b,b,q1,[]).
+mueve(q1,[],[z],qf,[z]).
+
+transita(q1,[],z,qf,[z]):-!.
+transita(Qi,[X|Y],R,Qf,T):-
+    X\=[],
+    mueve(Qi,X,R,P,S),
+    transita(P,Y,S,Qf,T).
+
+acepta(X,Resultado):-
+    transita(q0,X,[z],Q,_),
+    Q=qf,
+    Resultado is 1,
+    !.
+
+

@@ -1,0 +1,10 @@
+rubio(marcos).
+moreno(juan).
+padre(pedro,juan).
+padre(marcos,pedro).
+padre(juan,ramon).
+hijo(X,Y):-padre(X,Y).
+abuelo(X,Y) :-
+    padre(X,Z),
+    padre(Z,Y).
+hijo(marcos,jorge).

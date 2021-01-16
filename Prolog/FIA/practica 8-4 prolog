@@ -1,0 +1,4 @@
+borrar(X,[X],[]).
+
+borrar(X,[Y|Xs],[X|Ys]):-
+    borrar(X,Xs,Ys).

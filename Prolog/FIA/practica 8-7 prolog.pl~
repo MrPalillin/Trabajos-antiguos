@@ -1,0 +1,9 @@
+sublista(X,[X|_],[]).
+
+sublista(Y,[X,Y|_],[X]).
+
+%append([X|Xs],Ys,[X|Zs]):-append(Xs,Ys,Zs).
+
+sublista(X,[Y|Ys],Z):-
+    append([Y],[Z],[Z])
+

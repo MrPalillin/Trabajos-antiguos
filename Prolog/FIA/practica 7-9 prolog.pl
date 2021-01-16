@@ -1,0 +1,2 @@
+horoscopo(Dia,Mes,Signo):-
+

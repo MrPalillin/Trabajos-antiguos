@@ -1,0 +1,1 @@
+esLista([X|Xs]).

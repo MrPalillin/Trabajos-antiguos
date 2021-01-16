@@ -1,0 +1,13 @@
+builtin(A is B).
+builtin(A = B).
+builtin(A >= B).
+builtin(read(X)).
+builtin(A > B).
+builtin(A =:= B).
+builtin(functor(T,F,N)).
+builtin(write(X)).
+builtin(A < B).
+builti(A =< B).
+
+solve(true,true):-
+!.

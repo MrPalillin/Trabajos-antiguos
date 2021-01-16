@@ -1,0 +1,32 @@
+pieza_basica(llanta).
+pieza_basica(radios).
+pieza_basica(eje).
+pieza_basica(piñones).
+pieza_basica(manillar).
+pieza_basica(sillin).
+pieza_basica(plato).
+pieza_basica(pedales).
+pieza_basica(cadena).
+
+pieza_compuesta(rueda_delantera).
+pieza_compuesta(cuadro).
+pieza_compuesta(traccion).
+pieza_compuesta(rueda_trasera).
+
+composicion(rueda_delantera,[llanta,radios,eje]).
+composicion(cuadro,[manillar,sillin,traccion]).
+composicion(traccion,[eje,plato,pedales,cadena]).
+composicion(rueda_trasera,[llanta,radios,eje,piñones]).
+composicion(bicicleta,[rueda_delantera_cuadro,rueda_trasera]).
+
+
+es_basica([Result|_], Result):- pieza_basica(Result).
+es_basica([_|Elem], Result):- es_basica(Elem, Result).
+es_basica([Elem|_], Result):- composicion(Elem, L), es_basica(L, Result).
+es_basica([_|Elem], Result):- composicion(Elem, L), es_basica(L, Result).
+
+
+piezas_de(X, Result):-
+    composicion(X, L),
+    es_basica(L, Result).
+
